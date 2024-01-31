@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
     {
         public function index(){
-            $category = Category::all();
+            $category = Category::orderBy('category_id','desc')->Paginate(5);
             return view('backend.category.index',compact('category'));
         }
     
@@ -48,5 +48,10 @@ $category->update();
 alert()->success('อัพเดทแว้ววววว😎','บันทึกแล้วจ้าาาาา😁');
 return redirect()->route('c.index');
 }
-
+public function delete($category_id){
+    $category = Category::find($category_id);
+    $category->delete();
+    alert()->success('ลบแว้ววววว😣','ลบแล้วจ้าาาาา😒');
+    return redirect()->route('c.index');
+    }
     }

@@ -5,6 +5,9 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Category;
+use App\Models\Products;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +25,10 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $c = Category::all();
+    $p = Products::all();
+    $u = User::all();
+    return view('dashboard',compact('c','p','u'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -38,9 +44,14 @@ Route::get('admin/user/index',[UserController::class, 'index'])->name('u.index')
 // เมนู  category
 Route::get('admin/category/time',[CategoryController::class, 'index'])->name('c.index');
 Route::get('admin/category/time1',[CategoryController::class, 'create'])->name('c.create');
-Route::post('admin/category/time2',[CategoryController::class, 'insert'])->name('c.insert');
-Route::get('admin/category/edil/{id}',[CategoryController::class, 'edit'])->name('c.edit');
-Route::post('admin/category/update/{id}',[CategoryController::class, 'update'])->name('c.update');
+Route::post('admin/category/time2',[CategoryController::class, 'insert']);
+Route::get('admin/category/edit/{id}',[CategoryController::class, 'edit']);
+Route::post('admin/category/update/{id}',[CategoryController::class, 'update']);
+Route::get('admin/category/delete/{id}',[CategoryController::class, 'delete']);
 // เมนู  product
-Route::get('admin/product/item',[ProductController::class, 'index'])->name('p.index');
-Route::get('admin/product/item1',[ProductController::class, 'create'])->name('p.create');
+Route::get('admin/product/index',[ProductController::class, 'index'])->name('p.index');
+Route::get('admin/product/create',[ProductController::class, 'create'])->name('p.create');
+Route::post('admin/product/insert',[ProductController::class, 'insert'])->name('p.insert');
+Route::get('admin/product/edit/{id}',[ProductController::class, 'edit']);
+Route::post('admin/product/update/{id}',[ProductController::class, 'update']);
+Route::get('admin/product/delete/{id}',[ProductController::class, 'delete']);

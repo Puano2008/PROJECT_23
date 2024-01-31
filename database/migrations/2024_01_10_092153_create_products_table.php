@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('procduct_id',10)->comment("รหัสสินค้า");
             $table->string('name',255)->comment("ชื่อสินค้า");
             $table->string('price',255)->comment("ราคา");
-            $table->text('descripition')->comment("รายระเอียดสินค้า");
+            $table->text('description')->comment("รายระเอียดสินค้า");
             $table->integer('category_id')->comment("รหัสประเภทสินค้า");
             $table->string('image',255)->comment("รูป");
             $table->timestamps();

@@ -5,7 +5,7 @@
                         <div class="card">
                             <h5 class="card-header">Products</h5>
                             <div class="table-responsive text-nowrap">
-                                <a href="{{ route('c.create') }}" class="btn btn-success mx-3"><i class='bx bxs-plus-circle'></i> เพิ่มข้อมูล</a>
+                                <a href="{{ route('p.create') }}" class="btn btn-success mx-3"><i class='bx bxs-plus-circle'></i> เพิ่มข้อมูล</a>
                               <table class="table mt-4">
                                 <thead class="table-dark">
                                   <tr>
@@ -20,20 +20,25 @@
                                   </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
+                                    @foreach ($product as $pro)
                                   <tr>
-                                  <td>1</td>
-                                  <td>iphone 14 Pro Max</td>
-                                  <td>iphone.jpg</td>
-                                  <td>45,990 บาท</td>
-                                  <td>ผลิตโดยบริษัทแอปเปิ้ล</td>
-                                  <td></td>
-                                  <td></td>
+                                  <td>{{$product->firstItem()+ $loop->index}}</td>
+                                  <td>{{$pro->name}}</td>
                                   <td>
-                                  <a href="" class="btn btn-success">แก้ไข</a>
-                                  <a href="" class="btn btn-danger">ลบ</a>
+                                    <img src="{{asset('backend/product/resize/'.$pro->image)}}" alt="" width="30%">
+                                  </td>
+                                  <td>{{$pro->price}}</td>
+                                  <td>{{$pro->description}}</td>
+                                  <td>{{$pro->created_at}}</td>
+                                  <td>{{$pro->updated_at}}</td>
+                                  <td>
+
+                                    <a href="{{url('admin/product/edit/'.$pro->procduct_id)}}" class="btn btn-warning">แก้ไข</a>
+                                    <a href="{{url('admin/product/delete/'.$pro->procduct_id)}}" class="btn btn-danger">ลบ</a>
                                   </td>
                                   </tr>
                                 </tbody>
+                                @endforeach
                               </table>
                             </div>
                           </div>

@@ -18,19 +18,22 @@
             <tbody class="table-border-bottom-0">
             @foreach ($category as $cat)
               <tr>
-              <td>{{$cat->category_id}}</td>
+              <td>{{$category->firstItem() + $loop->index}}</td>
               <td>{{$cat->name}}</td>
               <td>{{$cat->created_at}}</td>
               <td>{{$cat->updated_at}}</td>
               <td>
-                <a href="{{url('admin/category/edil/'.$cat->category_id)}}" class="btn btn-success">แก้ไข</a>
-                <a href="" class="btn btn-danger">ลบ</a>
-                
+                <a href="{{url('admin/category/edit/'.$cat->category_id)}}" class="btn btn-success">แก้ไข</a>
+                <a href="{{url('admin/category/delete/'.$cat->category_id)}}" class="btn btn-danger">ลบ</a>
+
               </td>
               </tr>
               @endforeach
             </tbody>
           </table>
+          <div class="mt-3 cortainer">
+          {{$category->links('pagination::bootstrap-5')}}
+        </div>
         </div>
       </div>
     </div>
